@@ -5,7 +5,7 @@ class Login extends Component {
    
    //loginHandler = this.loginHandler.bind(this);
         state = {
-            username: "myusername",
+            username: "",
             password: "mypassword"
         }
  
