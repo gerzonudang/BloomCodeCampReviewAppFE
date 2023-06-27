@@ -1,85 +1,44 @@
-import React, { useState  } from "react"; //,useEffect
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState,useEffect } from "react"; //
+import { BrowserRouter as Router, Switch, Route, Redirect  } from "react-router-dom";
 import api from "../../api/labs";
 import "./App.css";
 // import Header from "../Header";
-import AddContact from "../AddContact";
-// import ContactList from "../ContactList";
+// import AddContact from "../AddContact";
+ import Dashboard from "../Dashboard";
 // import ContactDetail from "../ContactDetail";
 // import EditContact from "../EditContact";
 import Login from  "../Login";
 
 function App()  {
-   const [contacts, setContacts] = useState([]);
-
+   //const [contacts, setContacts] = useState([]);
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+   useEffect(() => {
+    // This code will run whenever the value of isLoggedIn changes
+    alert(isLoggedIn);
+  }, [isLoggedIn]);
 //   //RetrieveContacts
 //   const retrieveContacts = async () => {
 //     const response = await api.get("http://localhost:8080/contacts/");
 //     return response.data;
 //   };
-
-  const addContactHandler = async (contact) => {
-    contact.phone_numbers = contact.phone_numbers.split(",");
-    for (let i = 0; i < contact.phone_numbers.length; i++) {
-      contact.phone_numbers[i] = contact.phone_numbers[i].trim();
-    }
-    console.log(contact);
-
-
-    const request = {
-      ...contact
-    };
-
-    const response = await api.post("http://localhost:8080/contacts/", request);
-    console.log(response);
-    setContacts([...contacts, response.data]);
-  };
-
-//   const updateContactHandler = async (contact) => {
-
-//     contact.phone_numbers = contact.phone_numbers.split(",");
-//     console.log(contact.phone_numbers);
-//     for (let i = 0; i < contact.phone_numbers.length; i++) {
-//       contact.phone_numbers[i] = contact.phone_numbers[i].trim();
-//     }
-
-//     console.log(contact);
-
-//     const response = await api.put(`http://localhost:8080/contacts/${contact.id}`, contact);
-//     const { id } = response.data;
-//     setContacts(
-//       contacts.map((contact) => {
-//         return contact.id === id ? { ...response.data } : contact;
-//       })
-//     );
-//     getAllContacts();
-//   };
-
-//   const removeContactHandler = async (id) => {
-//     await api.delete(`http://localhost:8080/contacts/${id}`);
-//     const newContactList = contacts.filter((contact) => {
-//       return contact.id !== id;
-//     });
-
-//     setContacts(newContactList);
-//   };
-
-//   const getAllContacts = async () => {
-//     const allContacts = await retrieveContacts();
-//     if (allContacts) setContacts(allContacts);
-//   };
-
-//   useEffect(() => {
-//     const getAllContacts = async () => {
-//         const allContacts = await retrieveContacts();
-//         if (allContacts) setContacts(allContacts);
-//       };
-//     getAllContacts();
-//   }, []);
-// const data = {"value" : "Contact test"};
+const handleLogin = (token) => {
+  // Store the token securely (e.g., in local storage or cookies)
+  // Set isLoggedIn to true
+  localStorage.setItem("token", token);
+  if (localStorage.getItem("token")) {
+    setIsLoggedIn(true);
+  }
+};
+const handleLogout = () => {
+  // Clear the stored token and user data
+  // Set isLoggedIn to false
+  localStorage.removeItem("token");
+  if (!localStorage.getItem("token")) {
+    setIsLoggedIn(false);
+  }
+};
 
 const loginHandler = async (credentials) => {
-  
   const request = {
     ...credentials
   };
@@ -91,62 +50,83 @@ const loginHandler = async (credentials) => {
       }
     });
     
-    console.log(response.data);
+    handleLogin(response.data.token)
   } catch (error) {
     console.error(error);
   }
 };
+    
+  // const addContactHandler = async (contact) => {
+  //   contact.phone_numbers = contact.phone_numbers.split(",");
+  //   for (let i = 0; i < contact.phone_numbers.length; i++) {
+  //     contact.phone_numbers[i] = contact.phone_numbers[i].trim();
+  //   }
+  //   console.log(contact);
 
-  
+
+  //   const request = {
+  //     ...contact
+  //   };
+
+  //   const response = await api.post("http://localhost:8080/contacts/", request);
+  //   console.log(response);
+  //   setContacts([...contacts, response.data]);
+  // };
+  // Custom PrivateRoute component to protect routes
 
 
-  return (
-    <div className="ui container">
-      <Router>
-        {/* <Header data={data}/> */}
-        <Switch>
 
-          <Route path="/login" 
-            render={(props) => (
-              <Login {...props} loginHandler = {loginHandler}/>
-            )}
-          />
+const PrivateRoute = ({ component: Component, isLoggedIn, onLogout, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isLoggedIn ? (
+        <Component {...props} onLogout={onLogout} />
+      ) : (
+        <Redirect to="/login" />
+      )
+    }
+  />
+);
+return (
+  <div className="ui container">
+    <Router>
+      <Switch>
+        <Route
+          path="/"
+          render={(props) =>
+            isLoggedIn ? (
+              <Redirect to="/dashboard" />
+            ) : (
+              <Login {...props} loginHandler={loginHandler} onLogin={handleLogin} />
+            )
+          }
+        />
 
-          {/* <Route
-            path="/"
-            exact
-            render={(props) => (
-              <ContactList
-                {...props}
-                contacts={contacts}
-                getContactId={removeContactHandler}
-              />
-            )}
-          />
-       
-          
+      <Route
+          path="/dashboard"
+          render={(props) =>
+            isLoggedIn ? (
+              <Dashboard {...props} handleLogout={handleLogout} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
+        />
+        {/* <PrivateRoute
+          path="/dashboard"
+          component={Dashboard}
+          isLoggedIn={isLoggedIn}
+          onLogout={handleLogout}
+        /> */}
+        <Route exact path="/">
+          {isLoggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+        </Route>
+      </Switch>
+    </Router>
+  </div>
+);
 
-          <Route
-            path="/edit"
-            render={(props) => (
-              <EditContact
-                {...props}
-                updateContactHandler={updateContactHandler}
-              />
-            )}
-          />
-
-          <Route path="/contact/:id" component={ContactDetail} /> */}
-          <Route
-            path="/add"
-            render={(props) => (
-              <AddContact {...props} addContactHandler={addContactHandler} />
-            )}
-          />
-        </Switch>
-      </Router>
-    </div>
-  );
 }
 
 export default App;

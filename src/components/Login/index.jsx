@@ -3,13 +3,12 @@ import './Login.css';
 
 class Login extends Component {
    
+   //loginHandler = this.loginHandler.bind(this);
         state = {
             username: "myusername",
             password: "mypassword"
         }
  
-
-
 loginProcess = (e) => {
     e.preventDefault();
     if (this.state.username === "" || this.state.password === "") {
