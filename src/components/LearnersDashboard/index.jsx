@@ -29,7 +29,50 @@ render() {
                 <button>Logout</button>
             </div>
             <div className="welcome-text">Welcome Name!</div>
-           
+            <div className="work-wrapper">
+                <div className="corner-title">
+                <span>Corner Title</span>
+                </div>
+                <div className="work">
+
+                </div>
+                <div className="work">
+                    
+                </div>
+                <div className="work">
+
+                </div>
+                <div className="work">
+
+                </div>
+            </div>
+
+            <div className="work-wrapper">
+                <div className="corner-title">
+                    <span>Corner Title</span>
+                 </div>
+                <div className="work">
+
+                </div>
+                <div className="work">
+
+                </div>
+                <div className="work">
+
+                </div>
+            </div>
+
+            <div className="work-wrapper">
+                <div className="corner-title">
+                <span>Corner Title</span>
+                </div>
+                <div className="work">
+
+                </div>
+                <div className="work">
+
+                </div>
+            </div>
         </div>
     );
   }

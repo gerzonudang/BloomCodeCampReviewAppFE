@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import './ReviewerDashboard.css';
 
 class Reviewer extends Component {
@@ -22,7 +23,41 @@ class Reviewer extends Component {
 
 render() {
     return (
-        <div><p>Welcome Reviewer!</p></div>
+        
+        <div className="reviewer-dashboard-wrapper">
+            <div className="reviewer-dashboard-container">
+                <div className="reviewer-dashboard-header">
+                    <h1>Reviewer Dashboard</h1>
+                    <Link >Logout</Link>
+                </div>
+                <div className="reviewer-dashboard-body">
+                  <div className="reviewer-work">
+                    <div className="work">
+
+                    </div>
+                    <div className="work">
+                      
+                    </div>
+                  </div>
+                  <div className="reviewer-work">
+                    <div className="work">
+
+                    </div>
+                    <div className="work">
+                      
+                    </div>
+                  </div>
+                  <div className="reviewer-work">
+                    <div className="work">
+
+                    </div>
+                    <div className="work">
+                      
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
       
     );
   }
