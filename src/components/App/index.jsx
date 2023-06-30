@@ -44,6 +44,8 @@ const loginHandler = async (credentials) => {
       }
     });
     console.log(response );
+    
+    localStorage.setItem("username", response.data.username);
     setUserType(response.data.userType.toLowerCase());
     handleLogin(response.data.token)
   } catch (error) {

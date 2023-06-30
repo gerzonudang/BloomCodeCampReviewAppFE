@@ -1,0 +1,69 @@
+.div-ass {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+}
+.div-ass {
+    display: none;
+}
+.modal-learner-add-ass {
+position: fixed;
+   border: 1px solid black;
+   background-color: #3d282828;
+   
+   z-index: 3;
+   width: 100%;
+   height: 100%;
+   /* css to blur the background */
+   filter: blur(8px);
+   top: 0;
+   left: 0;
+}
+
+.modal-learner-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+}
+.modal-learner-content {
+    border: 1px black solid;
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #d7daff;
+    max-width: 320px;
+    height: 280px;
+    position: absolute;
+    z-index: 6;
+}
+.modal-header {
+    font-weight: 700;
+    font-size: 32px;
+}
+.github-url-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.branch-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.button-container-ass  {
+    display: flex;
+    justify-content: space-around;
+}
+.input-ass {
+    padding : 5px;
+    border-radius: 5px;
+    border: 0px;
+}
