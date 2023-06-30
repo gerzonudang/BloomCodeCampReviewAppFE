@@ -31,6 +31,9 @@ position: fixed;
     justify-content: center;
     align-items: center;
 }
+li {
+    list-style: none;
+}
 .modal-learner-content {
     border: 1px black solid;
     display: inline-flex;
@@ -40,7 +43,7 @@ position: fixed;
     border-radius: 10px;
     background-color: #d7daff;
     max-width: 320px;
-    height: 280px;
+    height: 400px;
     position: absolute;
     z-index: 6;
 }

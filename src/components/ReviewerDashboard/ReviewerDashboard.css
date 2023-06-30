@@ -1,65 +1,60 @@
-.login-wrapper {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-}
-h2 {
-    display: inline-block;
-}
-.login-header {
+.dashboard-wrapper-learners {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100px;
-}
-.form-login {
- background-color: --p-border;
- display: flex;
- flex-direction: column;
- row-gap: 4px;
- width: 320px;
- height: 320px;
- margin-left: auto;
- margin-right: auto;
- margin-top: auto;
- margin-bottom: auto;
-}
-.credentials-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-top: 20px;
-  row-gap: 6px;
-} 
-
-.credentials-container input {
+    height: 90vh;
+    background-color: #f5f5f5;
+    row-gap: 20px;
+    padding-top: 30px;
+    position: relative;
+  }
+  
+  .actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 30px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding-left: 10px;
-    font-size: 14px;
-}
-
-.credentials-container input:focus {
-    outline: none;
-    border: 1px solid #000;
-}
-
-.credentials-container button {
-    width: 100%;
-    height: 30px;
+  }
+  .actions-wrapper > * {
+    margin: 0 10px;
+  }
+  .actions-wrapper button {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
     border: none;
-    border-radius: 4px;
-    background-color: #000;
-    color: #fff;
-    font-size: 14px;
+    background-color: #f5f5f5;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-}
-
-.credentials-container button:hover {
-    background-color: #333;
-}
+  }
+  .welcome-text {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .preview-work-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position:relative;
+    column-gap: 20px;
+    row-gap: 10px;
+    padding: 20px;
+  }
+  
+  .corner-title {
+    position: absolute;
+    z-index: 2;
+    left: 100px;
+    top: -11px;
+    font-weight: 700;
+  }
+  

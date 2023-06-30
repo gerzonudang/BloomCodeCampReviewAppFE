@@ -46,6 +46,7 @@ const loginHandler = async (credentials) => {
     console.log(response );
     
     localStorage.setItem("username", response.data.username);
+    localStorage.setItem("userId", response.data.userId);
     setUserType(response.data.userType.toLowerCase());
     handleLogin(response.data.token)
   } catch (error) {
