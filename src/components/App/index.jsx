@@ -6,6 +6,7 @@ import "./App.css";
  import Dashboard from "../Dashboard";
  import LearnerDashboard from "../LearnersDashboard";
  import ReviewerDashboard from "../ReviewerDashboard";
+ import HomePage from "../HomePage";
 
 import Login from  "../Login";
 
@@ -81,7 +82,10 @@ return (
             )
           }
         />
-    
+      <Route
+          path="/Home"
+          render={(props) => ( <HomePage />)}
+      />
         <PrivateRoute
           path="/dashboard"
           component={Dashboard}

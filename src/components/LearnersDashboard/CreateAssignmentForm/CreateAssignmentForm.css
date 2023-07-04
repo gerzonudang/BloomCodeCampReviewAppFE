@@ -1,0 +1,22 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    row-gap: 1rem;
+}
+label, input {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.form-create-ass {
+    position: relative;
+}
+.create-ass-x {
+    position: absolute;
+    right: 0;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+

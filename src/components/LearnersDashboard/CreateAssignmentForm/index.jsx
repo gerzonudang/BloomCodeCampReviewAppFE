@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from "../../../api/labs";
+import './CreateAssignmentForm.css';
 
 const CreateAssignmentForm = (props) => {
   const [assignmentData, setAssignmentData] = useState({
@@ -36,14 +37,22 @@ const CreateAssignmentForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="branch"
-        value={assignmentData.branch}
-        onChange={handleInputChange}
-        placeholder="Branch"
-      />
+    <form onSubmit={handleSubmit} className='form-create-ass'>
+      <div className="create-ass-x" onClick = {props.closeFormHander}>X</div>
+    <div className="input-container">
+
+        <label htmlFor="">Branch</label>
+        <input
+            type="text"
+            name="branch"
+            value={assignmentData.branch}
+            onChange={handleInputChange}
+            placeholder="Branch"
+        />
+    </div>
+    <div className="input-container">   
+        <label htmlFor="">Github URL</label>
+        
       <input
         type="text"
         name="githubUrl"
@@ -51,6 +60,11 @@ const CreateAssignmentForm = (props) => {
         onChange={handleInputChange}
         placeholder="GitHub URL"
       />
+    </div>
+
+<div className="input-container">   
+        <label htmlFor="">Number</label>
+        
       <input
         type="text"
         name="number"
@@ -58,6 +72,10 @@ const CreateAssignmentForm = (props) => {
         onChange={handleInputChange}
         placeholder="Number"
       />
+    </div>
+
+ <div className="input-container">   
+    <label htmlFor="">Code Review URL</label>
       <input
         type="text"
         name="codeReviewVideoUrl"
@@ -65,6 +83,10 @@ const CreateAssignmentForm = (props) => {
         onChange={handleInputChange}
         placeholder="Code Review Video URL"
       />
+    </div>
+<div className="input-container">   
+        <label htmlFor="">Status</label>
+        
       <input
         type="text"
         name="status"
@@ -72,14 +94,10 @@ const CreateAssignmentForm = (props) => {
         onChange={handleInputChange}
         placeholder="Status"
       />
-      <input
-        type="text"
-        name="userId"
-        defaultValue={props.userId}
-        onChange={handleInputChange}
-        placeholder="User ID"
-      />
+    </div>
+    <div className="input-container">   
       <button type="submit">Create Assignment</button>
+    </div>
     </form>
   );
 };

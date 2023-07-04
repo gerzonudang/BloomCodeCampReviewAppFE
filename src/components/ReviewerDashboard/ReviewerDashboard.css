@@ -1,4 +1,4 @@
-.dashboard-wrapper-learners {
+.dashboard-wrapper-reviewer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,7 +38,7 @@
     margin-bottom: 20px;
   }
   .preview-work-wrapper {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
@@ -47,7 +47,7 @@
     position:relative;
     column-gap: 20px;
     row-gap: 10px;
-    padding: 20px;
+    padding: 20px; */
   }
   
   .corner-title {

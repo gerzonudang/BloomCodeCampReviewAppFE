@@ -22,7 +22,7 @@ function Learner() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-              const response = await api.get('/api/assignments', {
+              const response = await api.get('/api/assignments/learner/' + localStorage.getItem("userId"), {
                 headers: {
                   'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
@@ -46,44 +46,52 @@ function Learner() {
     };
     const createAssignmentFormOpen = () => {
       const createAss = document.querySelector('.createAss');
+   
       createAss.style.display ="block"
+    }
+    const createAssignmentFormClose = () => {
+      const createAss = document.querySelector('.createAss');
+      createAss.style.display ="none"
+
     }
     return (
         <div className="dashboard-wrapper-learners">
         <h1>Learner Dashboard</h1>
         <div className="actions-wrapper">
-            <button className='sumbitNewBtn'onClick={createAssignmentFormOpen}>Submit New</button>
+            <button className='sumbitNewBtn' onClick={createAssignmentFormOpen} closeFormHander = {createAssignmentFormClose}>Submit New</button>
             <button>Logout</button>
         </div>
         <div className="welcome-text">Welcome Name!</div>
-        <div className="preview-work-wrapper">
-            <div className="corner-title">
-            <span>Need work</span>
-            </div>
-           
-            {data && data.length > 0 && data.filter(assignment=>assignment.status === "need revision").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
-        
+        <div className ="preview-works">
+          <div className="preview-work-wrapper">
+              <div className="corner-title">
+              <span>Need work</span>
+              </div>
+              <div>
+
+              {data && data.length > 0 && data.filter(assignment=>assignment.status === "need revision").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
+              </div>
+
+          </div>
+
+          <div className="preview-work-wrapper">
+              <div className="corner-title">
+                  <span>Completed</span>
+              </div>
+              {data && data.length > 0 && data.filter(assignment=> assignment.status==="passed").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
           
-                
-        </div>
+          </div>
 
-        <div className="preview-work-wrapper">
-            <div className="corner-title">
-                <span>Completed</span>
-             </div>
-             {data && data.length > 0 && data.filter(assignment=> assignment.status==="passed").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
-        
-        </div>
-
-        <div className="preview-work-wrapper">
-            <div className="corner-title">
-            <span>In review</span>
-            </div>
-            {data && data.length > 0 && data.filter(assignment=>assignment.status !== "need revision" && assignment.status!=="passed").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
-        
+          <div className="preview-work-wrapper">
+              <div className="corner-title">
+              <span>In review</span>
+              </div>
+              {data && data.length > 0 && data.filter(assignment=>assignment.status !== "need revision" && assignment.status!=="passed").map(assignment => <Assignment key={assignment.id} assignment={assignment} handleDataFromChild = {handleDataFromChild}/>)}
+          
+          </div>
         </div>
         <div className="createAss">
-          <CreateAssignmentForm reviewerId = {localStorage.getItem("reviewerId")} userId = {localStorage.getItem("userId")}/>
+          <CreateAssignmentForm closeFormHander = {createAssignmentFormClose} reviewerId = {localStorage.getItem("reviewerId")} userId = {localStorage.getItem("userId")}/>
         </div>
         < AssignmentModal selectedAss = {dataFromChild} codeReviewer = {dataFromChild.codeReviewer} user = {dataFromChild.user}/> 
     </div>
